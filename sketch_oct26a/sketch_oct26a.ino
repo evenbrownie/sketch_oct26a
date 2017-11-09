@@ -56,7 +56,7 @@ int zeroR = 0;
 
 //PID Variables
 float p = -.03;
-float i;
+float i = -.01;
 float d; 
 
 //Error Variables
@@ -64,6 +64,14 @@ int pErrorL = 0;
 int pErrorR = 0;
 int pErrorMid = 0;
 
+int iErrorL = 0;
+int iErrorR = 0;
+
+int dErrorL = 0;
+int dErrorR = 0;
+
+int pastErrorL = 0;
+int pastErrorR = 0;
 void setup() {
   // put your setup code here, to run once:
 pinMode(rightSensor, INPUT);
@@ -100,7 +108,8 @@ Serial.begin(9600);
 
 
 void loop() {
-  
+  pastErrorL = vLeftSensor;
+  pastErrorR = vRightSensor;
   // put your main code here, to run repeatedly:
   
   currentMillis = millis();  //update time
@@ -121,9 +130,15 @@ void loop() {
 
   pErrorL = zeroL - vLeftSensor;
   pErrorR = zeroR - vRightSensor;
+  pErrorMid = zeroMn vMidSensor;
+  
+  iErrorL += pErrorL;
+  iErrorR += pErrorR;
 
-  speedL = straightL - (p*pErrorL);
-  speedR = straightR - (p*pErrorR);
+  dErrorL = (vLeftSensor - pastErrorL);
+
+  speedL = straightL - (p*pErrorL) - (i*iErrorL);
+  speedR = straightR - (p*pErrorR) - (i*iErrorR);
   
   //analogWrite to motors depending on sensor values
  // Left Motor
