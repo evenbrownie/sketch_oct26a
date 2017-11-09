@@ -46,7 +46,7 @@ int motorState0 = LOW;
 //Time Variables
 int currentMillis;
 int previousMillis = 0;
-int delayTime = 25;
+int delayTime = 10;
 
 //Zeroing Variables
 int nSamples = 100;
@@ -56,8 +56,8 @@ int zeroR = 0;
 
 //PID Variables
 float p = -.03;
-float i = -.01;
-float d; 
+float i = 0;
+float d = -.01; 
 
 //Error Variables
 int pErrorL = 0;
@@ -132,13 +132,14 @@ void loop() {
   pErrorR = zeroR - vRightSensor;
   pErrorMid = zeroMn vMidSensor;
   
-  iErrorL += pErrorL;
-  iErrorR += pErrorR;
+  //iErrorL += pErrorL;
+  //iErrorR += pErrorR;
 
-  dErrorL = (vLeftSensor - pastErrorL);
+  dErrorL = (vLeftSensor - pastErrorL)/delayTime;
+  dErrorR = (vRightSensor - pastErrorR)/delayTime;
 
-  speedL = straightL - (p*pErrorL) - (i*iErrorL);
-  speedR = straightR - (p*pErrorR) - (i*iErrorR);
+  speedL = straightL - (p*pErrorL) - (i*iErrorL) - (d*dErrorL);
+  speedR = straightR - (p*pErrorR) - (i*iErrorR) - (d*dErrorR);
   
   //analogWrite to motors depending on sensor values
  // Left Motor
