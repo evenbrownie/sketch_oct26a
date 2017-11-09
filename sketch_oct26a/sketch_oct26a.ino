@@ -49,13 +49,13 @@ int previousMillis = 0;
 int delayTime = 10;
 
 //Zeroing Variables
-int nSamples = 100;
+int nSamples = 300;
 int zeroM = 0;
 int zeroL = 0;
 int zeroR = 0;
 
 //PID Variables
-float p = -.17; //.15
+float p = -.23; //.15
 float i = 0;
 float d = 0;  //.15
 
@@ -92,17 +92,17 @@ pinMode (ledBlue, OUTPUT);
 Serial.begin(9600);
 
 // zero
-  for (int k = 0; k < nSamples; k++)
+  for (int k = 0; k < 1; k++)
   {
     zeroM += analogRead(midSensor);
     zeroL += analogRead(leftSensor);
     zeroR += analogRead(rightSensor);
     
-    delay(7);
+   
   }
-  zeroM /= nSamples;
-  zeroL /= nSamples;
-  zeroR /= nSamples;
+ // zeroM = zeroM/nSamples;
+  //zeroL = zeroL/nSamples;
+  //zeroR = zeroR/nSamples;
 }
 
 
@@ -140,7 +140,15 @@ void loop() {
 
   speedL = straightL - (p*pErrorL) - (i*iErrorL) - (d*dErrorL);
   speedR = straightR - (p*pErrorR) - (i*iErrorR) - (d*dErrorR);
-  
+
+  Serial.println(zeroL);
+  Serial.println(zeroR);
+  Serial.println("\n");
+  Serial.println(vLeftSensor);
+  Serial.println(vRightSensor);
+  Serial.println("");
+  constrain(speedL,0,255);
+  constrain(speedR,0,255);
   //analogWrite to motors depending on sensor values
  // Left Motor
   analogWrite(LAnalog, speedL);      //93 for now
@@ -152,18 +160,18 @@ void loop() {
   digitalWrite(RIn3, motorState1);   //May need to adjust the high low depending on configuration
   digitalWrite(RIn4, motorState0);
 
-  if((speedL+7) > speedR){
+  if((speedL) > speedR){
     digitalWrite(ledBlue, HIGH);
     digitalWrite(ledRed, LOW);
     digitalWrite(ledGreen, LOW);
   }
 
-  if((speedL+7) < speedR){
+  if((speedL) < speedR){
     digitalWrite(ledRed, HIGH);
     digitalWrite(ledGreen,LOW);
     digitalWrite(ledBlue,LOW);
   }
-  if((speedL+7) == speedR){
+  if((speedL) == speedR){
     digitalWrite(ledGreen, HIGH);
     digitalWrite(ledRed, LOW);
     digitalWrite(ledBlue, LOW);
