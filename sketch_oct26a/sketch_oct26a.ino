@@ -30,7 +30,7 @@ int L2;
 int maxSpeedL = 252;     //adjust the speed of the wheels to match eatch other
 int midSpeedL;
 int speedL;
-int straightL = 93;
+int straightL = 243;
 
 // Right Motor
 int R1;   //defines motion as forward
@@ -38,7 +38,7 @@ int R2;
 int maxSpeedR = 255;  //adjust the speed of the wheels to match each other
 int midSpeedR;
 int speedR;
-int straightR = 100;
+int straightR = 250;
 
 int motorState1= HIGH;
 int motorState0 = LOW;
@@ -122,9 +122,9 @@ void loop() {
   vLeftSensor = analogRead(leftSensor);
   }
 
-  if (abs(pErrorL) > 300 && abs(pErrorR) > 300){
-    motorState1 = LOW;
-  }
+  //if (abs(pErrorL) > 300 && abs(pErrorR) > 300){
+  //  motorState1 = LOW;
+ // }
 
 
 
