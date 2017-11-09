@@ -154,12 +154,18 @@ void loop() {
 
   if((speedL+7) > speedR){
     digitalWrite(ledBlue, HIGH);
+    digitalWrite(ledRed, LOW);
+    digitalWrite(ledGreen, LOW);
   }
 
   if((speedL+7) < speedR){
     digitalWrite(ledRed, HIGH);
+    digitalWrite(ledGreen,LOW);
+    digitalWrite(ledBlue,LOW);
   }
   if((speedL+7) == speedR){
     digitalWrite(ledGreen, HIGH);
+    digitalWrite(ledRed, LOW);
+    digitalWrite(ledBlue, LOW);
   }
 }
