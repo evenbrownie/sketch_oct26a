@@ -143,14 +143,14 @@ void loop() {
   
   //analogWrite to motors depending on sensor values
  // Left Motor
-  //analogWrite(LAnalog, speedL);      //93 for now
- // digitalWrite(LIn1, motorState1);   //May need to adjust the high low depending on configuration
-  //digitalWrite(LIn2, motorState0);
+  analogWrite(LAnalog, speedL);      //93 for now
+  digitalWrite(LIn1, motorState1);   //May need to adjust the high low depending on configuration
+  digitalWrite(LIn2, motorState0);
 
   // Right Motor
-  //analogWrite(RAnalog, speedR);   //100 for now
-  //digitalWrite(RIn3, motorState1);   //May need to adjust the high low depending on configuration
-  //digitalWrite(RIn4, motorState0);
+  analogWrite(RAnalog, speedR);   //100 for now
+  digitalWrite(RIn3, motorState1);   //May need to adjust the high low depending on configuration
+  digitalWrite(RIn4, motorState0);
 
   if((speedL+7) > speedR){
     digitalWrite(ledBlue, HIGH);
