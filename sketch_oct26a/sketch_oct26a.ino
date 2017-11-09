@@ -130,7 +130,7 @@ void loop() {
 
   pErrorL = zeroL - vLeftSensor;
   pErrorR = zeroR - vRightSensor;
-  pErrorMid = zeroMn vMidSensor;
+  pErrorMid = zeroM - vMidSensor;
   
   //iErrorL += pErrorL;
   //iErrorR += pErrorR;
@@ -159,7 +159,7 @@ void loop() {
   if((speedL+7) < speedR){
     digitalWrite(ledRed, HIGH);
   }
-  if((speedL+7 == speedR){
+  if((speedL+7) == speedR){
     digitalWrite(ledGreen, HIGH);
   }
 }
