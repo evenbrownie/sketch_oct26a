@@ -30,23 +30,25 @@ int L2;
 int maxSpeedL = 252;     //adjust the speed of the wheels to match eatch other
 int midSpeedL;
 int speedL;
-int straightL = 248;
+int straightL = 238;    //170
 
 // Right Motor
 int R1;   //defines motion as forward
 int R2;
-int maxSpeedR = 255;  //adjust the speed of the wheels to match each other
+int maxSpeedR = 178;  //adjust the speed of the wheels to match each other
 int midSpeedR;
 int speedR;
-int straightR = 255;
+int straightR = 246;  //216
 
 int motorState1= HIGH;
 int motorState0 = LOW;
+int ledState0 = LOW;
+int ledState1 = HIGH;
 
 //Time Variables
 int currentMillis;
 int previousMillis = 0;
-int delayTime = 10;
+int delayTime = 0;
 
 //Zeroing Variables
 int nSamples = 300;
@@ -56,8 +58,8 @@ int zeroR = 0;
 
 //PID Variables
 float p = -.22; //.15
-float i = 0;
-float d = 0;  //.15
+float i = -.15;
+float d = -.2;  //.15
 
 //Error Variables
 int pErrorL = 0;
@@ -123,11 +125,10 @@ void loop() {
   }
 
  if (vLeftSensor < 600 && vRightSensor < 600){
-   //motorState1 = LOW;
+   motorState1 = LOW;
    analogWrite(LAnalog, 0);
    analogWrite(RAnalog, 0);
-   digitalWrite(ledRed, HIGH);
-   digitalWrite(ledBlue, HIGH);
+   ledState0 = HIGH;
  }
 
   pErrorL = zeroL - vLeftSensor;
@@ -143,13 +144,13 @@ void loop() {
   speedL = straightL - (p*pErrorL) - (i*iErrorL) - (d*dErrorL);
   speedR = straightR - (p*pErrorR) - (i*iErrorR) - (d*dErrorR);
 
-  Serial.println(zeroL);
-  Serial.println(zeroR);
-  Serial.println("\n");
-  Serial.println(vLeftSensor);
-  Serial.println(vRightSensor);
-  Serial.println(vMidSensor);
-  Serial.println("");
+  //Serial.println(zeroL);
+  //Serial.println(zeroR);
+  //Serial.println("\n");
+  //Serial.println(vLeftSensor);
+  //Serial.println(vRightSensor);
+  //Serial.println(vMidSensor);
+  //Serial.println("");
   constrain(speedL,0,255);
   constrain(speedR,0,255);
   //analogWrite to motors depending on sensor values
@@ -164,15 +165,15 @@ void loop() {
   digitalWrite(RIn4, motorState0);
 
   if((speedL) > speedR){
-    digitalWrite(ledBlue, HIGH);
-    digitalWrite(ledRed, LOW);
-    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledBlue, ledState1);
+    digitalWrite(ledRed, ledState0);
+    digitalWrite(ledGreen, ledState0);
   }
 
   if((speedL) < speedR){
-    digitalWrite(ledRed, HIGH);
-    digitalWrite(ledGreen,LOW);
-    digitalWrite(ledBlue,LOW);
+    digitalWrite(ledRed, ledState1);
+    digitalWrite(ledGreen,ledState0);
+    digitalWrite(ledBlue,ledState0);
   }
   if((speedL) == speedR){
     digitalWrite(ledGreen, HIGH);
