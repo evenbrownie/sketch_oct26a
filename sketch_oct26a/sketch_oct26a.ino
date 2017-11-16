@@ -30,7 +30,7 @@ int L2;
 int maxSpeedL = 252;     //adjust the speed of the wheels to match eatch other
 int midSpeedL;
 int speedL;
-int straightL = 160;
+int straightL = 248;
 
 // Right Motor
 int R1;   //defines motion as forward
@@ -38,7 +38,7 @@ int R2;
 int maxSpeedR = 255;  //adjust the speed of the wheels to match each other
 int midSpeedR;
 int speedR;
-int straightR = 152;
+int straightR = 255;
 
 int motorState1= HIGH;
 int motorState0 = LOW;
@@ -55,7 +55,7 @@ int zeroL = 0;
 int zeroR = 0;
 
 //PID Variables
-float p = -.19; //.15
+float p = -.22; //.15
 float i = 0;
 float d = 0;  //.15
 
