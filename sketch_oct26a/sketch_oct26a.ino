@@ -122,11 +122,13 @@ void loop() {
   vLeftSensor = analogRead(leftSensor);
   }
 
-  //if (abs(pErrorL) > 300 && abs(pErrorR) > 300){
-  //  motorState1 = LOW;
- // }
-
-
+ if (vLeftSensor < 600 && vRightSensor < 600){
+   //motorState1 = LOW;
+   analogWrite(LAnalog, 0);
+   analogWrite(RAnalog, 0);
+   digitalWrite(ledRed, HIGH);
+   digitalWrite(ledBlue, HIGH);
+ }
 
   pErrorL = zeroL - vLeftSensor;
   pErrorR = zeroR - vRightSensor;
@@ -146,6 +148,7 @@ void loop() {
   Serial.println("\n");
   Serial.println(vLeftSensor);
   Serial.println(vRightSensor);
+  Serial.println(vMidSensor);
   Serial.println("");
   constrain(speedL,0,255);
   constrain(speedR,0,255);
