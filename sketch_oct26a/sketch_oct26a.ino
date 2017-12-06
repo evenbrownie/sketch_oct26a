@@ -166,13 +166,13 @@ void loop() {
 
   if((speedL) > speedR){
     digitalWrite(ledBlue, ledState1);
-    digitalWrite(ledRed, ledState0);
+    digitalWrite(ledRed, LOW);
     digitalWrite(ledGreen, ledState0);
   }
 
   if((speedL) < speedR){
     digitalWrite(ledRed, ledState1);
-    digitalWrite(ledGreen,ledState0);
+    digitalWrite(ledGreen,LOW);
     digitalWrite(ledBlue,ledState0);
   }
   if((speedL) == speedR){
