@@ -66,8 +66,8 @@ int pErrorL = 0;
 int pErrorR = 0;
 int pErrorMid = 0;
 
-int iErrorL = 0;
-int iErrorR = 0;
+unsigned int iErrorL = 0;
+unsigned int iErrorR = 0;
 
 int dErrorL = 0;
 int dErrorR = 0;
