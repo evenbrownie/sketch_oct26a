@@ -30,7 +30,7 @@ int L2;
 int maxSpeedL = 252;     //adjust the speed of the wheels to match eatch other
 int midSpeedL;
 int speedL;
-int straightL = 238;    //170
+int straightL = 255;    //170
 
 // Right Motor
 int R1;   //defines motion as forward
@@ -38,7 +38,7 @@ int R2;
 int maxSpeedR = 178;  //adjust the speed of the wheels to match each other
 int midSpeedR;
 int speedR;
-int straightR = 246;  //216
+int straightR = 255;  //216
 
 int motorState1= HIGH;
 int motorState0 = LOW;
@@ -57,17 +57,17 @@ int zeroL = 0;
 int zeroR = 0;
 
 //PID Variables
-float p = -.22; //.15
-float i = -.15;
-float d = -.2;  //.15
+float p = .4; //.15
+float i = 0; //.15; //-.15;
+float d = 0; //.2;  //.15
 
 //Error Variables
 int pErrorL = 0;
 int pErrorR = 0;
 int pErrorMid = 0;
 
-unsigned int iErrorL = 0;
-unsigned int iErrorR = 0;
+unsigned long iErrorL = 0;
+unsigned long iErrorR = 0;
 
 int dErrorL = 0;
 int dErrorR = 0;
@@ -147,12 +147,12 @@ void loop() {
   //Serial.println(zeroL);
   //Serial.println(zeroR);
   //Serial.println("\n");
-  //Serial.println(vLeftSensor);
-  //Serial.println(vRightSensor);
+  Serial.println(speedL);
+  Serial.println(speedR);
   //Serial.println(vMidSensor);
-  //Serial.println("");
-  constrain(speedL,0,255);
-  constrain(speedR,0,255);
+  Serial.println("");
+  speedL = constrain(speedL,0,255);
+  speedR = constrain(speedR,0,255);
   //analogWrite to motors depending on sensor values
  // Left Motor
   analogWrite(LAnalog, speedL);      //93 for now
